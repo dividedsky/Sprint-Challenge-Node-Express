@@ -1,3 +1,5 @@
+const pDb = require('../data/helpers/projectModel');
+
 const ensureValidProject = (req, res, next) => {
   if (!req.body.name) {
     res.status(400).json({errorMessage: 'the project must contain a name'});
@@ -12,4 +14,18 @@ const ensureValidProject = (req, res, next) => {
   } else next();
 };
 
-module.exports = {ensureValidProject};
+const ensureValidId = (req, res, next) => {
+  const id = req.params.id;
+  pDb
+    .get(id)
+    .then(project => {
+      next();
+    })
+    .catch(err => {
+      res
+        .status(404)
+        .json({errorMessage: `there is no project with that id: ${err}`});
+    });
+};
+
+module.exports = {ensureValidProject, ensureValidId};
