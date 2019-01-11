@@ -61,4 +61,16 @@ router.delete('/:id', ensureValidActionId, (req, res) => {
     });
 });
 
+router.put('/:id', ensureValidActionId, ensureValidAction, (req, res) => {
+  db.update(req.params.id, req.body)
+    .then(action => {
+      res.status(200).json(action);
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage: `there was an error updating the action: ${err}`,
+      });
+    });
+});
+
 module.exports = router;
