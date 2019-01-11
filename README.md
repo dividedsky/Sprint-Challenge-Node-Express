@@ -24,24 +24,29 @@ In this challenge, create a web API around the following resources: `Projects` a
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
-- [ ] Mention two parts of Express that you learned about this week.
+- [x] Mention two parts of Express that you learned about this week.
+* Express is a framework on top of Node's http server module. It simplifies creating servers. This week we learned about the basics of Express, including middleware and routing.
 
-- [ ] Describe Middleware?
+- [x] Describe Middleware?
+* Middleware are functions that receive the request and response objects. They can operate on the request and response, change the request, send a response, and call the next middleware.
 
-- [ ] Describe a Resource?
+- [x] Describe a Resource?
+* In the RESTful architectural style, everything is a resource. A resource is accessible by a unique URL and is managed through HTTP methods.
 
-- [ ] What can the API return to help clients know if a request was successful?
+- [x] What can the API return to help clients know if a request was successful?
+* The API can return HTTP status codes.
 
-- [ ] How can we partition our application into sub-applications?
+- [x] How can we partition our application into sub-applications?
+* The application can be broken into seperate files and then imported/exported using module.exports and require().
 
 ## Project Setup
 
 Follow these steps to set up and work on your project:
 
-- [ ] Create a forked copy of this project.
-- [ ] Add PM as collaborator on Github.
-- [ ] Clone your OWN version of Repo (Not Lambda's by mistake!).
-- [ ] Create a new Branch on the clone: git checkout -b `<firstName-lastName>`.
+- [x] Create a forked copy of this project.
+- [x] Add PM as collaborator on Github.
+- [x] Clone your OWN version of Repo (Not Lambda's by mistake!).
+- [x] Create a new Branch on the clone: git checkout -b `<firstName-lastName>`.
 - [ ] Implement the project on this Branch, committing changes regularly.
 - [ ] Push commits: git push origin `<firstName-lastName>`.
  
