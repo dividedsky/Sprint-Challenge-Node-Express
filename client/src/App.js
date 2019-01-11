@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Projects from './components/Projects';
 import Project from './components/Project';
 import axios from 'axios';
-import {Route} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
 
 const ax = axios.create({
   baseURL: 'http://localhost:8000',
@@ -16,6 +15,7 @@ class App extends Component {
     this.state = {
       projects: [],
       projectActions: [],
+      projectDetails: [],
     };
   }
 
@@ -37,6 +37,16 @@ class App extends Component {
       });
   };
 
+  getProjectDetails = id => {
+    ax.get(`/projects/${id}`)
+      .then(res => {
+        this.setState({projectDetails: res.data});
+      })
+      .catch(err => {
+        console.log(`there was an error fetching the project details: ${err}`);
+      });
+  };
+
   render() {
     return (
       <div className="App">
@@ -54,6 +64,8 @@ class App extends Component {
               {...props}
               actions={this.state.projectActions}
               getProjectActions={this.getProjectActions}
+              getProjectDetails={this.getProjectDetails}
+              details={this.state.projectDetails}
             />
           )}
         />
@@ -62,4 +74,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
