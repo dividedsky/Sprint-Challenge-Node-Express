@@ -19,11 +19,21 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', ensureValidProjectId, (req, res) => {
-  //const id = req.params.id;
   // id is checked in middleware. if we get here, just send the project
   db.get(req.params.id)
     .then(project => {
       res.status(200).json(project);
+    })
+    .catch(err => {
+      res.status(500).json({errorMessage: `idk how we got here: ${err}`});
+    });
+});
+
+router.get('/:id/actions', ensureValidProjectId, (req, res) => {
+  // id is checked in middleware. if we get here, just send the project
+  db.getProjectActions(req.params.id)
+    .then(actions => {
+      res.status(200).json(actions);
     })
     .catch(err => {
       res.status(500).json({errorMessage: `idk how we got here: ${err}`});
