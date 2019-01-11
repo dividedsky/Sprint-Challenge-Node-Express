@@ -25,11 +25,6 @@ router.get('/:id', ensureValidProjectId, (req, res) => {
     .then(project => {
       res.status(200).json(project);
     })
-    //.catch(err => {
-    //res
-    //.status(404)
-    //.json({errorMessage: `there is no project with that id: ${err}`});
-    //});
     .catch(err => {
       res.status(500).json({errorMessage: `idk how we got here: ${err}`});
     });

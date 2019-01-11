@@ -43,4 +43,22 @@ router.post('/', ensureValidAction, (req, res) => {
     });
 });
 
+router.delete('/:id', ensureValidActionId, (req, res) => {
+  db.remove(req.params.id)
+    .then(count => {
+      if (count === 1) {
+        res.status(200).send(`${count} action was deleted`);
+      } else {
+        res
+          .status(500)
+          .json({errorMessage: `there was an error deleting the action`});
+      }
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage: `there was an error deleting the action: ${err}`,
+      });
+    });
+});
+
 module.exports = router;
