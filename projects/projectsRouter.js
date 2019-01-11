@@ -59,11 +59,21 @@ router.delete('/:id', ensureValidId, (req, res) => {
       }
     })
     .catch(err => {
-      res
-        .status(500)
-        .json({
-          errorMessage: `there was an error deleting the project: ${err}`,
-        });
+      res.status(500).json({
+        errorMessage: `there was an error deleting the project: ${err}`,
+      });
+    });
+});
+
+router.put('/:id', ensureValidId, ensureValidProject, (req, res) => {
+  db.update(req.params.id, req.body)
+    .then(project => {
+      res.status(200).json(project);
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage: `there was an error updating the project: ${err}`,
+      });
     });
 });
 
