@@ -15,7 +15,9 @@ const Projects = props => {
       <h3>Projects</h3>
       <ul>
         {props.projects.map(p => (
-          <li>{p.name}</li>
+          <li key={p.id} onClick={() => props.history.push(`/${p.id}`)}>
+            {p.name}
+          </li>
         ))}
       </ul>
     </StyledProjects>
