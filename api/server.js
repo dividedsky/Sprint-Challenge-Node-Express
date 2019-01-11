@@ -1,11 +1,10 @@
 const express = require('express');
 const configureMiddleware = require('../config/middleware');
+const projectsRouter = require('../projects/projectsRouter');
 
 const server = express();
 configureMiddleware(server);
 
-server.get('/', (req, res) => {
-  res.status(200).send('sanity check! GET request to /');
-});
+server.use('/projects', projectsRouter);
 
 module.exports = server;
