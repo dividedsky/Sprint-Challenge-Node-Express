@@ -3,7 +3,7 @@ const db = require('../data/helpers/actionModel');
 const middleware = require('../common/middleware');
 
 const router = express.Router();
-const {ensureValidActionId} = middleware;
+const {ensureValidAction, ensureValidActionId} = middleware;
 
 router.get('/', (req, res) => {
   db.get()
@@ -27,6 +27,19 @@ router.get('/:id', ensureValidActionId, (req, res) => {
       res
         .status(500)
         .json({errorMessage: `i'm amazed that you made it here! ${err}`});
+    });
+});
+
+router.post('/', ensureValidAction, (req, res) => {
+  // action has already been validated in middleware
+  db.insert(req.body)
+    .then(action => {
+      res.status(200).json(action);
+    })
+    .catch(err => {
+      res.status(500).json({
+        errorMessage: `there was an error creating the action: ${err}`,
+      });
     });
 });
 
