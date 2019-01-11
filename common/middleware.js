@@ -1,4 +1,5 @@
 const pDb = require('../data/helpers/projectModel');
+const aDb = require('../data/helpers/actionModel');
 
 const ensureValidProject = (req, res, next) => {
   if (!req.body.name) {
@@ -14,7 +15,7 @@ const ensureValidProject = (req, res, next) => {
   } else next();
 };
 
-const ensureValidId = (req, res, next) => {
+const ensureValidProjectId = (req, res, next) => {
   const id = req.params.id;
   pDb
     .get(id)
@@ -28,4 +29,22 @@ const ensureValidId = (req, res, next) => {
     });
 };
 
-module.exports = {ensureValidProject, ensureValidId};
+const ensureValidActionId = (req, res, next) => {
+  const id = req.params.id;
+  aDb
+    .get(id)
+    .then(action => {
+      next();
+    })
+    .catch(err => {
+      res
+        .status(404)
+        .json({errorMessage: `there is no action with that id: ${err}`});
+    });
+};
+
+module.exports = {
+  ensureValidProject,
+  ensureValidProjectId,
+  ensureValidActionId,
+};
